@@ -38,7 +38,6 @@ function w_engine.swing(user, itemname)
         elseif item.slash_dir == 1 then
             mp = -1
         end
-        minetest.chat_send_all(mp)
 
         for i = (-amount * mp) / 2, (amount * mp) / 2, 1 * mp do
             if delay then
