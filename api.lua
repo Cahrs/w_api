@@ -27,8 +27,8 @@ function w_api.register_weapon(itemname, descrip)
         description = descrip.description,
         inventory_image = descrip.inventory_image,
         wield_scale = {x = 2, y = 2, z = 1} or descrip.wield_scale,
-        primary_use = descrip.primary_use or {ent_bl = true, crit_mp = 1.5, kb_mp = 2, slash_dir = 0, swing_delay = 0.5, dmg = 2, delay = 0.1, depth = 0.1, range = 4, spread = 10, amount = 4},
-        secondary_use = descrip.secondary_use or {ent_bl = true, crit_mp = 1.5, kb_mp = 2, slash_dir = 0, swing_delay = 0.3, dmg = 2, delay = 0.1, depth = 0.1, range = 4, spread = 10, amount = 4},
+        primary_use = descrip.primary_use or {ent_bl = true, crit_mp = 1.5, kb_mp = 2, slash_dir = "left", swing_delay = 0.5, dmg = 2, delay = 0.1, depth = 0.1, range = 4, spread = 10, amount = 4},
+        secondary_use = descrip.secondary_use or {ent_bl = true, crit_mp = 1.5, kb_mp = 2, slash_dir = "left", swing_delay = 0.3, dmg = 2, delay = 0.1, depth = 0.1, range = 4, spread = 10, amount = 4},
         on_use = function(itemstack, user, pointed_thing)
             w_engine.on_click(user, minetest.registered_items[itemname].primary_use)
         end,
@@ -45,9 +45,9 @@ function w_engine.swing(user, item)
         local timer = 0
         local depth = 0
         local amount = item.amount
-        if item.slash_dir == 0 then
+        if item.slash_dir == "left" then
             mp = 1
-        elseif item.slash_dir == 1 then
+        elseif item.slash_dir == "right" then
             mp = -1
         end
 
@@ -55,7 +55,7 @@ function w_engine.swing(user, item)
             objs = {}
         end
 
-        for i = (-amount * mp) / 2, (amount * mp) / 2, 1 * mp do
+        for i = (amount * mp) / 2, (-amount * mp) / 2, -1 * mp do
             if delay then
                 minetest.after(timer, w_engine.do_raycast, user, objs, item, i)
                 timer = timer + delay
@@ -63,7 +63,6 @@ function w_engine.swing(user, item)
                 w_engine.do_raycast(user, objs, item, i)
             end
         end
-
     end
 end
 
@@ -83,9 +82,6 @@ function w_engine.do_raycast(user, objs, item, count)
             return
         end
         w_engine.handle_ray(user, objs, pointed_thing, item, e_pos, depth)
-    end
-    if objs then
-        return objs
     end
 end
 
@@ -123,8 +119,10 @@ function w_engine.handle_ray(user, objs, pointed_thing, item, dir, depth)
         else
             pointed_thing.ref:add_velocity(vector.multiply(user:get_look_dir(), item.kb_mp * spd))
         end
-        if depth and objs then
+        if depth and not objs then
             depth = depth + 1
+            return depth
+        elseif depth and objs then
             return depth, objs
         end
     end
