@@ -26,16 +26,16 @@ function w_api.register_weapon(itemname, descrip)
     minetest.register_craftitem(itemname, {
         description = descrip.description,
         inventory_image = descrip.inventory_image,
-        wield_scale = {x = 2, y = 2, z = 1} or descrip.wield_scale,
+        wield_scale = descrip.wield_scale or {x = 2, y = 2, z = 1},
         primary_use = descrip.primary_use or {ent_bl = true, crit_mp = 1.5, kb_mp = 2, slash_dir = "left", swing_delay = 0.5, dmg = 2, delay = 0.1, depth = 0.1, range = 4, spread = 10, amount = 4},
         secondary_use = descrip.secondary_use or {ent_bl = true, crit_mp = 1.5, kb_mp = 2, slash_dir = "left", swing_delay = 0.3, dmg = 2, delay = 0.1, depth = 0.1, range = 4, spread = 10, amount = 4},
         on_use = function(itemstack, user, pointed_thing)
             w_engine.on_click(user, minetest.registered_items[itemname].primary_use)
         end,
         --secondary use is not fully-supported/ready-to-use due to builtin api functions limitations
-        --[[on_place = function(itemstack, user, pointed_thing)
+        on_secondary_use = function(itemstack, user, pointed_thing)
             w_engine.on_click(user, minetest.registered_items[itemname].secondary_use)
-        end]]
+        end
     })
 end
 

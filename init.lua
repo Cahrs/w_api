@@ -5,6 +5,7 @@ w_api.register_weapon("w_api:sword", {
     description = "Large Sword",
     inventory_image = "w_api_sword.png",
     primary_use = {ent_bl = true, crit_mp = 1.5, kb_mp = 2, swing_delay = 0.3, slash_dir = "left", dmg = 2, delay = 0.1, depth = 1, range = 4, spread = 10, amount = 4},
+    secondary_use = {ent_bl = true, crit_mp = 2, kb_mp = 3, swing_delay = 0.5, slash_dir = "left", dmg = 4, delay = 0.2, depth = 3, range = 3, spread = 12, amount = 5},
 })
 
 minetest.register_entity("w_api:test", {
