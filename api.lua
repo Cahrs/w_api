@@ -32,7 +32,6 @@ function w_api.register_weapon(itemname, descrip)
         on_use = function(itemstack, user, pointed_thing)
             w_engine.on_click(user, minetest.registered_items[itemname].primary_use)
         end,
-        --secondary use is not fully-supported/ready-to-use due to builtin api functions limitations
         on_secondary_use = function(itemstack, user, pointed_thing)
             w_engine.on_click(user, minetest.registered_items[itemname].secondary_use)
         end
