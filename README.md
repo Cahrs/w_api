@@ -1,49 +1,72 @@
 # w_api
 
+Adds a melee weapons api for more advanced/deep combat within Minetest.  
+
+## Features
+* Support for custom damage groups
+* Primary and secondary attacks
+* Variable slash depth and weapon reach
+* Directional slashes
+* Customizable swing delay and time per weapon
+* Critical hits
+* ???
+
+## Usage (mods)
+`w_api.register_weapon(name, weapon definition)`:
+
+Weapon Definition
+-----------------
+Used by `w_api.register_weapon`.
+
 ```
-Information:  
-    Adds a melee weapons api for more advanced/deep combat within Minetest  
+{
+    description = "Super cool weapon",
 
-Features:  
-    Support for custom damage groups,  
-    Primary and secondary attacks,  
-    Variable slash depth and weapon reach,  
-    Directional slashes,  
-    Customizable swing delay and time per weapon,  
-    Critical hits,  
+    wield_scale = {x = 1, y = 1, z = 1},
+    -- Weapon wield scale (see Minetest lua_api.txt)
 
-    more..?  
+    inventory_image = "your_weapon.png",
 
-Usage (modders):  
-    w_api allows easily creating highly customizable weapons via *w_api.register_weapon*
+    ent_bl = false, 
+    -- If true, objects will only be hit once (rather than by multiple raycasts).
 
-    Example usage:  
-        w_api.register_weapon(name, def)  
+    crit_mp = 1,
+    -- Value multiplied by damage groups when hitter has a negative Y velocity.
+    
+    kb_mp = 1,
+    -- Value to multiply by player / ent speed for knockback.
 
-    Parameters:  
-        primary_use / secondary_use (table) parameters:  
-            ent_bl -- if true disallow from multiple rays hitting the same obj  
-            crit_mp -- value multiplied by damage groups when hitter has a negative Y velocity  
-            kb_mp -- value to multiply by player / ent speed for knockback  
-            slash_dir -- "left": right -> left; "right": left -> right slash direction  
-            swing_delay -- time (in seconds) until swing start  
-            delay -- delay (in seconds) between each ray in a swing  
-            depth -- how many objs deep in a crowd that each ray can damage  
-            range -- sword reach (in meters)  
-            spread -- angle (in degrees) between each ray in a swing  
-            amount -- the amount of rays in a sword swing  
-            damage_groups -- a table of damage groups  
+    slash_dir = "left",
+    -- Weapon slash-to direction (eg. right-to-left).
 
-        callbacks (table) parameters  
-            primary_use / secondary_use (table) parameters  
-                on_use -- function to be called on weapon swing,  
-                        run arbitrary code and then return true or false to continue with the calculations  
-                on_hit -- function to be called on obj hit,  
-                        run arbitrary code and then return true or false to continue with the calculations  
+    swing_delay = 1,
+    -- Time (in seconds) until swing starts.
 
-        wield_scale -- the weapons wielded scale  
+    delay = 1,
+    -- Delay (in seconds) between each raycast in a swing.
+    
+    depth = 3,
+    -- How many objects deep that a weapon can damage.
 
-        Misc:  
-            inventory_image  
-            description  
+    range = 5,
+    -- Sword reach (in nodes).
+
+    spread = 20,
+    -- Angle (in degrees) between each raycast in a swing.
+    
+    amount = 10,
+    -- Ray count in a sword swing.
+
+    damage_groups = {}
+    -- A table of damage groups (see Minetest lua_api.txt).
+
+
+    on_use = function(itemstack, user, pointed_thing),
+    -- Function to be called when weapon is used.
+    -- Return false to prevent default behavior.
+
+    on_hit = function(itemstack, hitter, pointed_thing),
+    -- Function to be called when an object is hit by the weapon.
+    -- Return false to prevent default behavior.
+}
 ```
