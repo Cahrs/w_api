@@ -35,8 +35,10 @@ Usage (modders):
 
         callbacks (table) parameters
             primary_use / secondary_use (table) parameters
-                on_use -- function to be called on weapon swing, run arbitrary code and then return true or false to continue with the calculations
-                on_use -- function to be called on obj hit, run arbitrary code and then return true or false to continue with the calculations
+                on_use -- function to be called on weapon swing, 
+                        run arbitrary code and then return true or false to continue with the calculations
+                on_use -- function to be called on obj hit, 
+                        run arbitrary code and then return true or false to continue with the calculations
 
         wield_scale -- the weapons wielded scale
 
