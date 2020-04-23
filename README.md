@@ -4,12 +4,12 @@ Information:
     Adds a melee weapons api for more advanced/deep combat within Minetest
 
 Features:
-    Support for custom damage groups
-    Primary and secondary attacks
-    Variable slash depth and weapon reach
-    Directional slashes
-    Customizable swing delay and time per weapon
-    Critical hits
+    Support for custom damage groups,
+    Primary and secondary attacks,
+    Variable slash depth and weapon reach,
+    Directional slashes,
+    Customizable swing delay and time per weapon,
+    Critical hits,
 
     more..?
 
