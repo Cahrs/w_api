@@ -28,7 +28,7 @@ Usage (modders):
             slash_dir -- "left": right -> left; "right": left -> right slash direction  
             swing_delay -- time (in seconds) until swing start  
             delay -- delay (in seconds) between each ray in a swing  
-            depth -- how man objs deep in a crowd that each ray can damage  
+            depth -- how many objs deep in a crowd that each ray can damage  
             range -- sword reach (in meters)  
             spread -- angle (in degrees) between each ray in a swing  
             amount -- the amount of rays in a sword swing  
@@ -38,7 +38,7 @@ Usage (modders):
             primary_use / secondary_use (table) parameters  
                 on_use -- function to be called on weapon swing,  
                         run arbitrary code and then return true or false to continue with the calculations  
-                on_use -- function to be called on obj hit,  
+                on_hit -- function to be called on obj hit,  
                         run arbitrary code and then return true or false to continue with the calculations  
 
         wield_scale -- the weapons wielded scale  
