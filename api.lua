@@ -137,6 +137,12 @@ function w_engine.handle_ray(itemstack, user, def, calls, objs, depth, pointed_t
             local vel = user:get_player_velocity()
             local spd = math.sqrt((vel.x * vel.x) + (vel.z * vel.z))
 
+            if vel.y <= -1 then
+                for group, _ in pairs(def.damage_groups) do
+                    def.damage_groups[group] = def.damage_groups[group] * def.crit_mp
+                end
+            end
+
             pointed_thing.ref:punch(user, 1.0, {full_punch_interval = 1.0, damage_groups = def.damage_groups})
 
             if pointed_thing.ref:is_player() then
