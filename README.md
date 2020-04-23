@@ -1,6 +1,6 @@
 # w_api
 
-    
+```
 Information:  
     Adds a melee weapons api for more advanced/deep combat within Minetest  
 
@@ -46,3 +46,4 @@ Usage (modders):
         Misc:  
             inventory_image  
             description  
+```
