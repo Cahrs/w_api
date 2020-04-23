@@ -63,12 +63,17 @@ Used by `w_api.register_weapon`.
         -- A table of damage groups (see Minetest lua_api.txt).
     },
 
-    on_use = function(itemstack, user),
-    -- Function to be called when weapon is used.
-    -- Return false to prevent default behavior.
+    callbacks = {
+        -- Table fields used for both primary_use and secondary_use
+        primary_use = {
+            on_use = function(itemstack, user),
+            -- Function to be called when weapon is used.
+            -- Return false to prevent default behavior.
 
-    on_hit = function(itemstack, hitter, object),
-    -- Function to be called when an object is hit by the weapon.
-    -- Return false to prevent default behavior.
+            on_hit = function(itemstack, hitter, object),
+            -- Function to be called when an object is hit by the weapon.
+            -- Return false to prevent default behavior.
+        }
+    },
 }
 ```
