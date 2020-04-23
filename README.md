@@ -14,7 +14,7 @@ Features:
     more..?  
 
 Usage (modders):  
-    w_api allows easily creating highly customizable weapons via *w_api.register_weapon*  
+    w_api allows easily creating highly customizable weapons via *w_api.register_weapon*
 
     Example usage:  
         w_api.register_weapon(name, def)  
